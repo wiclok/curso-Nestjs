@@ -13,21 +13,21 @@ export class taskController{
 
   @Post('tasks')
   createTask(){
-    return 'Creando Tareas...'
+    return this.taskService.createTasks();
   }
 
   @Put('/tasks')
   updateTask(){
-    return 'Editando Tareas...'
+    return this.taskService.updateTask();
   }
 
-  @Delete()
+  @Delete('/tasks')
   deleteTask(){
-    return 'Elimando Tareas...'
+    return this.taskService.deleteTask();
   }
-  @Patch()
+  @Patch('/tasks')
   updateTaskStatus(){
-    return 'Editando el estado de la tareas...'
+    return this.taskService.updateTaskStatus();
   }
 
 }
