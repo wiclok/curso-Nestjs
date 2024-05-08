@@ -1,31 +1,31 @@
 import { TaskService } from './task.service';
 import { Controller, Get, Post, Put, Delete, Patch } from "@nestjs/common";
 
-@Controller({})
+@Controller('/tasks')
 export class taskController{
 
   constructor(private taskService: TaskService){}
 
-  @Get('/tasks')
+  @Get()
   getAllTasks(){
     return this.taskService.getTasks();
   }
 
-  @Post('tasks')
+  @Post()
   createTask(){
     return this.taskService.createTasks();
   }
 
-  @Put('/tasks')
+  @Put()
   updateTask(){
     return this.taskService.updateTask();
   }
 
-  @Delete('/tasks')
+  @Delete()
   deleteTask(){
     return this.taskService.deleteTask();
   }
-  @Patch('/tasks')
+  @Patch()
   updateTaskStatus(){
     return this.taskService.updateTaskStatus();
   }
