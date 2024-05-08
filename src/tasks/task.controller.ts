@@ -1,5 +1,5 @@
 import { TaskService } from './task.service';
-import { Controller, Get, Post, Put, Delete, Patch, Body, Query } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Patch, Body, Query, Param } from "@nestjs/common";
 
 @Controller('/tasks')
 export class taskController{
@@ -10,6 +10,12 @@ export class taskController{
   getAllTasks(@Query() query: any){
     console.log(query)
     return this.taskService.getAllTasks();
+  }
+
+  @Get('/:id')
+  getTasks(@Param('id') id: string){
+    console.log(id)
+    return this.taskService.getTasks(parseInt(id));
   }
 
   @Post()

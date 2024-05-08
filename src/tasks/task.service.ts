@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, HttpCode, NotFoundException } from '@nestjs/common';
+import { NotFoundError } from 'rxjs';
 
-export interface User{
-  name: string,
-  age: number
+export interface User {
+  name: string;
+  age: number;
 }
 @Injectable()
-export class TaskService{
-
+export class TaskService {
   private tasks = [];
 
   // getTasks(): string {
@@ -14,24 +14,35 @@ export class TaskService{
   // }
 
   getAllTasks() {
-    return this.tasks
+    return this.tasks;
   }
 
-  createTasks(task: any){
-    this.tasks.push(task)
-    return task
+  getTasks(id: number) {
+    const taskFound = this.tasks.find(task=> task.id==id)
+    if (!taskFound){
+      return new NotFoundException(`No se enctró la tarea ${id}`)
+    }
+    return taskFound;
   }
 
-  updateTask(){
-    return 'Editando Tareas...'
+  createTasks(task: any) {
+    console.log(task);
+    this.tasks.push({
+      ...task,
+      id: this.tasks.length + 1,
+    });
+    return task;
   }
 
-  deleteTask(){
-    return 'Borrando Tareas...'
+  updateTask() {
+    return 'Editando Tareas...';
   }
 
-  updateTaskStatus(){
-    return 'Editando el estado de las tareas...'
+  deleteTask() {
+    return 'Borrando Tareas...';
   }
 
+  updateTaskStatus() {
+    return 'Editando el estado de las tareas...';
+  }
 }
